@@ -15,22 +15,22 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Block calculator is defined here.
+ * Block simple calculator is defined here.
  *
- * @package     block_calculator
+ * @package     block_simple_calculator
  * @copyright   2020 A K M Safat Shahin <safatshahin@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
-class block_calculator extends block_base {
+class block_simple_calculator extends block_base {
 
     /**
      * Initializes class member variables.
      */
     public function init() {
         // Needed by Moodle to differentiate between blocks.
-        $this->title = get_string('pluginname', 'block_calculator');
+        $this->title = get_string('pluginname', 'block_simple_calculator');
     }
 
     /**
@@ -43,7 +43,7 @@ class block_calculator extends block_base {
         if ($this->content !== null) {
             return $this->content;
         }
-        $renderer = $this->page->get_renderer('block_calculator');
+        $renderer = $this->page->get_renderer('block_simple_calculator');
         $this->content = new stdClass();
         $this->content->text = '';
         $this->content->text .= $renderer->render_calculator();
@@ -59,7 +59,7 @@ class block_calculator extends block_base {
 
         // Load user defined title and make sure it's never empty.
         if (empty($this->config->title)) {
-            $this->title = get_string('pluginname', 'block_calculator');
+            $this->title = get_string('pluginname', 'block_simple_calculator');
         } else {
             $this->title = $this->config->title;
         }

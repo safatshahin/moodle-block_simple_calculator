@@ -17,7 +17,7 @@
 /**
  * Plugin strings are defined here.
  *
- * @package     block_calculator
+ * @package     block_simple_calculator
  * @category    string
  * @copyright   2020 A K M Safat Shahin <safatshahin@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,5 +26,5 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Calculator';
-$string['calculator:addinstance'] = 'Add a new calculator block';
-$string['calculator:myaddinstance'] = 'Add a new calculator block to dashboard';
+$string['simple_calculator:addinstance'] = 'Add a new calculator block';
+$string['simple_calculator:myaddinstance'] = 'Add a new calculator block to dashboard';

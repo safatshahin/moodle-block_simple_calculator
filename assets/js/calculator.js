@@ -16,7 +16,7 @@
 /**
  * Plugin js.
  *
- * @package     block_calculator
+ * @package     block_simple_calculator
  * @category    string
  * @copyright   2020 A K M Safat Shahin <safatshahin@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
