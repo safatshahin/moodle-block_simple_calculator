@@ -75,15 +75,6 @@ class block_calculator extends block_base {
     }
 
     /**
-     * Enables global configuration of the block in settings.php.
-     *
-     * @return bool True if the global configuration is enabled.
-     */
-    function has_config() {
-        return false;
-    }
-
-    /**
      * Sets the applicable formats for the block.
      *
      * @return string[] Array of pages and permissions.
