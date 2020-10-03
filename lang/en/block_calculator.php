@@ -26,5 +26,5 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Calculator';
-$string['calculator:addinstance'] = 'Add a new my calculator block';
+$string['calculator:addinstance'] = 'Add a new calculator block';
 $string['calculator:myaddinstance'] = 'Add a new calculator block to dashboard';
