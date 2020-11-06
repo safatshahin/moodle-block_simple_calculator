@@ -10,9 +10,8 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along with
+// Moodle.  If not, see <https://www.gnu.org/licenses/>.
 /**
  * Block simple calculator renderer.
  *
@@ -26,15 +25,6 @@ namespace block_simple_calculator\output;
 defined('MOODLE_INTERNAL') || die;
 
 class renderer extends \plugin_renderer_base {
-    /**
-     * Throws in a call to the JS for AJAX etc.
-     *
-     * @return string html for the page
-     */
-    public function __construct() {
-        global $PAGE;
-        parent::__construct($PAGE, RENDERER_TARGET_GENERAL);
-    }
 
     public function render_calculator() {
         $this->page->requires->css('/blocks/simple_calculator/assets/css/calculator.css');
