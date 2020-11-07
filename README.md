@@ -11,6 +11,6 @@ Using it for the quiz is also simple, please follow the steps below (Please note
 6. Go to the quiz settings for the quiz you want the block. In the settings, go the appearance and click show more.
 7. Change 'Show blocks during quiz attempts' to 'Yes'.
 8. Now keep the editing on, go to the quiz and start an attempt (preview).
-7. Edit the simple calculator block settings on this page, and now you can set 'Display on page types' to 'Attempt quiz page'.
+9. Edit the simple calculator block settings on this page, and now you can set 'Display on page types' to 'Attempt quiz page'.
 
 Note: The calculation is done in realtime, no calculation data is saved in the database.
