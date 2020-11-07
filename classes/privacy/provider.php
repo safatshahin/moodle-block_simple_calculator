@@ -15,17 +15,32 @@
 // Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin strings are defined here.
+ * Privacy Subsystem implementation for block_simple_calculator.
  *
  * @package     block_simple_calculator
- * @category    string
  * @copyright   2020 A K M Safat Shahin <safatshahin@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace block_simple_calculator\privacy;
+
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Calculator';
-$string['simple_calculator:addinstance'] = 'Add a new calculator block';
-$string['simple_calculator:myaddinstance'] = 'Add a new calculator block to dashboard';
-$string['privacy:metadata'] = 'The Simple Calculator block only displays the live calculation of the given values.';
+/**
+ * Privacy Subsystem for block_simple_calculator implementing null_provider.
+ *
+ * @copyright  2020 A K M Safat Shahin
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}
