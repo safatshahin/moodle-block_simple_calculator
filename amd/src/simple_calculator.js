@@ -13,48 +13,12 @@
 // You should have received a copy of the GNU General Public License along with
 // Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-/**
- * Plugin js.
- *
- * @package     block_simple_calculator
- * @copyright   2020 A K M Safat Shahin <safatshahin@gmail.com>
- * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 define(['jquery'], function($) {
     var calculator = {
         init: function() {
             var currentOperand = '';
             var previousOperand = '';
             var operation = null;
-            // CALCULATION
-            $.calc = function() {
-                let computation;
-                const prev = parseFloat(previousOperand);
-                const current = parseFloat(currentOperand);
-                if (isNaN(prev) || isNaN(current)) {
-                    return;
-                }
-                switch (operation) {
-                    case '+':
-                        computation = prev + current;
-                        break;
-                    case '-':
-                        computation = prev - current;
-                        break;
-                    case '*':
-                        computation = prev * current;
-                        break;
-                    case '÷':
-                        computation = prev / current;
-                        break;
-                    default:
-                        return;
-                }
-                currentOperand = computation;
-                operation = null;
-                previousOperand = '';
-            };
             // NUMBER CLICKS
             $(document).on('click', '.data-calculator-number', function() {
                 var number = $(this).text();
@@ -79,48 +43,66 @@ define(['jquery'], function($) {
             });
             // CALCULATOR OPS BUTTON
             $(document).on('click', '.data-calculator-operation', function() {
+                if (operation !== null && currentOperand !== '' && previousOperand !== '') {
+                    $.calc('operation');
+                    previousOperand = currentOperand;
+                    currentOperand = '';
+                    calculator.updateDisplay(currentOperand, operation, previousOperand);
+                }
                 operation = $(this).text();
                 if (currentOperand !== '') {
                     if (previousOperand !== '') {
-                        $.calc();
+                        $.calc('operation');
                     }
                     previousOperand = currentOperand;
                     currentOperand = '';
-                    calculator.updateDisplay(previousOperand, operation, currentOperand);
+                    calculator.updateDisplay(currentOperand, operation, previousOperand);
+                } else if (currentOperand === '') {
+                    if (previousOperand !== '') {
+                        calculator.updateDisplay(currentOperand, operation, previousOperand);
+                    }
                 }
             });
             // EQ BUTTON CLICK
             $(document).on('click', '.data-calculator-equals', function() {
                 if (currentOperand !== '') {
                     if (previousOperand !== '') {
-                        $.calc();
+                        $.calc('equal');
                     }
                     calculator.updateDisplay(currentOperand, operation, previousOperand);
                 }
             });
-
-        },
-        updateDisplay: function(currentOperand, operation, previousOperand) {
-            $.getString = function(number) {
-                const stringNumber = number.toString();
-                const integerDigits = parseFloat(stringNumber.split('.')[0]);
-                const decimalDigits = stringNumber.split('.')[1];
-                let integerDisplay;
-                if (isNaN(integerDigits)) {
-                    integerDisplay = '';
+            // CALCULATION
+            $.calc = function(feature) {
+                let finalValue;
+                var invalid = false;
+                const previous = parseFloat(previousOperand);
+                const current = parseFloat(currentOperand);
+                if (operation === '+') {
+                    finalValue = previous + current;
+                } else if (operation === '-') {
+                    finalValue = previous - current;
+                } else if (operation === '*') {
+                    finalValue = previous * current;
+                } else if (operation === '÷') {
+                    finalValue = previous / current;
                 } else {
-                    integerDisplay = integerDigits.toLocaleString('en', {maximumFractionDigits: 0});
+                    invalid = true;
                 }
-                if (decimalDigits) {
-                    return `${integerDisplay}.${decimalDigits}`;
-                } else {
-                    return integerDisplay;
+                if (!invalid) {
+                    currentOperand = finalValue;
+                    if (feature === 'equal') {
+                        operation = null;
+                        previousOperand = '';
+                    }
                 }
             };
-            var value = $.getString(currentOperand);
-            var previousValue = $.getString(previousOperand) + operation;
-            $("#data-block-calculator-current-operand").text(value);
+        },
+        updateDisplay: function(currentOperand, operation, previousOperand) {
+            var previousValue = '';
+            $("#data-block-calculator-current-operand").text(currentOperand);
             if (operation) {
+                previousValue = previousOperand + operation;
                 $("#data-block-calculator-previous-operand").text(previousValue);
             } else {
                 $("#data-block-calculator-previous-operand").text('');

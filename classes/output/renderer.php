@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die;
 class renderer extends \plugin_renderer_base {
 
     public function render_calculator() {
-        $this->page->requires->css('/blocks/simple_calculator/assets/css/calculator.css');
+        $this->page->requires->css('/blocks/simple_calculator/style.css');
         $this->page->requires->js_call_amd('block_simple_calculator/simple_calculator', 'init', array());
         $data = array();
         return parent::render_from_template('block_simple_calculator/simple_calculator', $data);
