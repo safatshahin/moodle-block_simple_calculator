@@ -44,3 +44,13 @@
     color: white;
     font-size: 1rem;
 }
+
+#block-calculator-output-popupbutton {
+    display: block;
+    position: fixed;
+    bottom: 75px;
+    right: 0; }
+#block-calculator-output-popupbutton a {
+    position: absolute;
+    right: 0;
+    transform: translateY(-100%); }

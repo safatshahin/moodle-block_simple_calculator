@@ -24,6 +24,8 @@
 
 
 class block_simple_calculator extends block_base {
+    const DISPLAYMODE_INLINE = 10;
+    const DISPLAYMODE_POPUP = 20;
 
     /**
      * Initializes class member variables.
@@ -31,6 +33,28 @@ class block_simple_calculator extends block_base {
     public function init() {
         // Needed by Moodle to differentiate between blocks.
         $this->title = get_string('pluginname', 'block_simple_calculator');
+    }
+
+    /**
+     * Can you configure this block?
+     *
+     * @return bool
+     */
+    public function instance_allow_config() {
+        return true;
+    }
+
+    /**
+     * Initialise any JavaScript required by this block.
+     */
+    public function get_required_javascript() {
+        parent::get_required_javascript();
+
+        $this->page->requires->js_call_amd('block_simple_calculator/simple_calculator', 'init', array());
+
+        if (!empty($this->config->displaymode) && $this->config->displaymode == self::DISPLAYMODE_POPUP) {
+            $this->page->requires->js_call_amd('block_simple_calculator/calculatorpopup', 'init', array());
+        }
     }
 
     /**
@@ -46,8 +70,16 @@ class block_simple_calculator extends block_base {
         $renderer = $this->page->get_renderer('block_simple_calculator');
         $this->content = new stdClass();
         $this->content->text = '';
-        $this->content->text .= $renderer->render_calculator();
+
+        if (empty($this->config->displaymode) || $this->config->displaymode == self::DISPLAYMODE_INLINE) {
+            $this->content->text .= $renderer->render_calculator();
+        }
+
         return $this->content;
+    }
+
+    public function is_empty() {
+        return parent::is_empty() && (!empty($this->config->displaymode) && $this->config->displaymode == self::DISPLAYMODE_POPUP);
     }
 
     /**
