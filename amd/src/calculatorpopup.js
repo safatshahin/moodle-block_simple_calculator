@@ -14,8 +14,8 @@
 // Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 define(
-    ['jquery', 'core/templates', 'core/notification', 'core/modal_factory', 'core/modal_events'],
-    function ($, templates, notification, ModalFactory, ModalEvents) {
+    ['jquery', 'core/templates', 'core/notification', 'core/modal_factory', 'core/modal_events', 'jqueryui'],
+    function ($, templates, notification, ModalFactory, ModalEvents, jqueryui) {
         var calculatorpopup = {
             init: function () {
                 var buttonpromise = templates.render('block_simple_calculator/popupbutton', {});
@@ -40,6 +40,10 @@ define(
                             type: ModalFactory.types.DEFAULT,
                         }).then(function (modal) {
                             modal.show();
+
+                            $(modal.getRoot()).draggable({
+                                handle: ".modal-header"
+                            });
 
                             modal.getRoot().on(ModalEvents.hidden, function() {
                                 $('[data-keybinding="Delete"]').trigger('click'); // Reset calculator state.
