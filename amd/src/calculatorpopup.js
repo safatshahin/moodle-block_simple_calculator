@@ -33,7 +33,10 @@ define(
 
                 var calculatorpromise = templates.render('block_simple_calculator/simple_calculator', {});
                 calculatorpromise.done(function (calculator) {
-                    $(document).on('click', '#block-calculator-output-popupbutton', function () {
+                    $(document).on('click', '#block-calculator-output-popupbutton', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
                         ModalFactory.create({
                             title: '',
                             body: calculator,
